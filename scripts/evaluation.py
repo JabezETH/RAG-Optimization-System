@@ -23,6 +23,18 @@ os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
 client = Client()
 
 def generate_syntetic_testdata(documents, file_path):
+    """
+    Generate synthetic test data using OpenAI models.
+    Args:
+        documents (list): A list of documents to generate test data from.
+        file_path (str): The file path to save the generated test data CSV file.
+    Returns:
+        pandas.DataFrame: The generated synthetic test data as a pandas DataFrame.
+    This function generates synthetic test data using OpenAI models. It takes a list of documents
+    as input and generates a test set of 10 samples, with a distribution of 50% simple, 25% reasoning,
+    and 25% multi_context. The generated test data is saved as a CSV file at the specified file path.
+    The function returns the generated test data as a pandas DataFrame.
+    """
     # generator with openai models
     generator_llm = ChatOpenAI(model="gpt-3.5-turbo-16k")
     critic_llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
@@ -42,6 +54,17 @@ def generate_syntetic_testdata(documents, file_path):
     return test_data
 
 def adding_answer_to_testdata(test_data, rag_pipeline, vector, retriever,file_path):
+    """
+    Adds answers to the test data using a RAG pipeline and saves the result to a CSV file.
+    Args:
+        test_data (pandas.DataFrame): The test data containing questions and ground truth answers.
+        rag_pipeline (callable): The RAG pipeline used to generate answers.
+        vector (object): The vector used by the RAG pipeline.
+        retriever (object): The retriever used to retrieve relevant documents.
+        file_path (str): The path to save the resulting dataset as a CSV file.
+    Returns:
+        Dataset: The dataset containing the questions, answers, contexts, and ground truth answers.
+    """
     questions = test_data['question'].to_list()
     ground_truth = test_data['ground_truth'].to_list()
     data = {'question': [], 'answer': [], 'contexts': [], 'ground_truth': ground_truth}
@@ -61,6 +84,18 @@ def adding_answer_to_testdata(test_data, rag_pipeline, vector, retriever,file_pa
     return dataset
 
 def ragas_evaluator(dataset):
+    """
+    Evaluates a given dataset using the RAGAS library's evaluation metrics.
+    Args:
+        dataset (Dataset): The dataset to be evaluated.
+    Returns:
+        pandas.DataFrame: A pandas DataFrame containing the evaluation results.
+            The DataFrame has the following columns:
+            - 'context_precision': The precision of the context retrieval.
+            - 'faithfulness': The faithfulness of the generated answer.
+            - 'answer_relevancy': The relevance of the generated answer.
+            - 'context_recall': The recall of the context retrieval.
+    """
     from ragas.metrics import (
         answer_relevancy,
         faithfulness,
