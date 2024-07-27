@@ -13,8 +13,8 @@ load_dotenv()
 
 def generate_syntetic_testdata(documents, file_path):
     # generator with openai models
-    generator_llm = ChatOpenAI(model="gpt-3.5-turbo-16k")
-    critic_llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
+    generator_llm = ChatOpenAI(model="gpt-4o")
+    critic_llm = ChatOpenAI(model="gpt-34o")
     embeddings = OpenAIEmbeddings()
 
     generator = TestsetGenerator.from_langchain(

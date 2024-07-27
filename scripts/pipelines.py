@@ -50,7 +50,7 @@ def simple_pipeline(vectorstore, question):
         """
     )
     
-    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.5)
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.5)
 
     def format_docs(docs):
         return "\n\n".join(doc.page_content for doc in docs)
