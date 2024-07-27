@@ -11,10 +11,21 @@ from matplotlib.colors import LinearSegmentedColormap
 from dotenv import load_dotenv
 load_dotenv()
 
+import os
+from langsmith import Client
+from uuid import uuid4
+
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+
+unique_id = uuid4().hex[0:8]
+os.environ["LANGCHAIN_PROJECT"] = f"Rag optimization system - {unique_id}"
+os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
+client = Client()
+
 def generate_syntetic_testdata(documents, file_path):
     # generator with openai models
-    generator_llm = ChatOpenAI(model="gpt-4o")
-    critic_llm = ChatOpenAI(model="gpt-34o")
+    generator_llm = ChatOpenAI(model="gpt-3.5-turbo-16k")
+    critic_llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
     embeddings = OpenAIEmbeddings()
 
     generator = TestsetGenerator.from_langchain(
