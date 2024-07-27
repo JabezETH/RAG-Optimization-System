@@ -2,3 +2,4 @@
 /data
 .venv
 .env
+/test_data
