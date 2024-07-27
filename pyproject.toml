@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "rag-optimization-system"
+version = "0.1.0"
+description = "Develop a Retrieval-Augmented Generation (RAG) system, benchmark its performance using RAGAS, and implement an optimization to improve the results."
+authors = ["Jabez <jabezkassa2022@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.2"
+datasets = "^2.20.0"
+langchain = "^0.2.11"
+langchain-core = "^0.2.24"
+langchain-community = "^0.2.10"
+langchain-chroma = "^0.1.2"
+langchain-openai = "^0.1.19"
+langchainhub = "^0.1.20"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

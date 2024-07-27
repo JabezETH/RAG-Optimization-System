@@ -26,7 +26,6 @@ os.environ["LANGCHAIN_TRACING_V2"] = "true"
 unique_id = uuid4().hex[0:8]
 os.environ["LANGCHAIN_PROJECT"] = f"Rag optimization system - {unique_id}"
 os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
-
 client = Client()
 
 # First RAG pipeline

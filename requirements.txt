@@ -1,8 +1,0 @@
-pandas
-datasets
-langchain
-langchain-core
-langchain-community
-langchain_chroma
-langchain-openai
-langchainhub
