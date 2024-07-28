@@ -117,3 +117,23 @@ def ragas_evaluator(dataset):
     result
     evaluation_result = result.to_pandas()
     return evaluation_result
+
+def evaluation_mean(evaluation_result):
+    """
+    Calculate the mean values of the evaluation metrics from the given evaluation result.
+    Args:
+        evaluation_result (dict): A dictionary containing the evaluation metrics.
+    Returns:
+        None
+    Prints:
+        The mean values of the evaluation metrics:
+            - context_precision: The mean value of the context precision metric.
+            - faithfulness: The mean value of the faithfulness metric.
+            - answer_relevancy: The mean value of the answer relevancy metric.
+            - context_recall: The mean value of the context recall metric.
+    """
+    context_precision = round(evaluation_result['context_precision'].mean()*100,2)
+    faithfulness = round(evaluation_result['faithfulness'].mean()*100,2)
+    answer_relevancy = round(evaluation_result['answer_relevancy'].mean()*100,2)
+    context_recall = round(evaluation_result['context_recall'].mean()*100,2)
+    print(f'context_precision: {context_precision}%, faithfulness: {faithfulness}%, answer_relevancy: {answer_relevancy}%, context_recall: {context_recall}%')

@@ -30,33 +30,14 @@ client = Client()
 
 # First RAG pipeline
 def simple_pipeline(vectorstore, question):
-    """
-    Generates an answer to a given question using a simple pipeline.
-    Args:
-        vectorstore (VectorStore): The vector store containing the contracts.
-        question (str): The question to be answered.
-    Returns:
-        str: The answer to the question.
-    Description:
-    This function implements a simple pipeline for generating answers to questions based on contracts. It uses a retriever to retrieve the most similar contracts to the question, and then uses a prompt template to generate the answer. The prompt template includes the context of the retrieved contracts and the question itself. The answer is generated using a language model (ChatOpenAI with model "gpt-4o" and temperature 0.5).
-    The function first creates a retriever using the given vectorstore. It then defines a prompt template with the input variables "context" and "question". The template includes the context of the retrieved contracts and the question itself. The function also defines a lambda function to format the retrieved documents into a string.
-    The function creates a chain using the prompt template and the retriever. The chain is invoked with the question to generate the answer. The answer is returned as a string.
-    Example:
-        >>> vectorstore = ...
-        >>> question = "What is the purpose of this contract?"
-        >>> answer = simple_pipeline(vectorstore, question)
-        >>> print(answer)
-        The purpose of this contract is to ...
-    """
+  
     retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 6})
     
     # Define the prompt template
     prompt_template = PromptTemplate(
         input_variables=["context", "question"],
         template="""
-        You are a contract assistant.
-        Use the following contract as a context to answer the question. Do not use any outside knowledge. 
-        If the answer is not in the context, simply state "The information is not available in the provided context."
+        Answer the question based on the given context."
 
         Context:
         {context}
@@ -87,16 +68,7 @@ def simple_pipeline(vectorstore, question):
 
 
 def multi_query_pipeline(vectorstore, question):
-    """
-    Generates a multi-query pipeline to retrieve relevant documents from a vector database and answer a user question.
-    
-    Args:
-        vectorstore (VectorStore): The vector store used for retrieval.
-        question (str): The user question.
-    
-    Returns:
-        str: The answer to the user question based on the retrieved documents.
-    """
+
     retriever = vectorstore.as_retriever()
     template = """You are an AI language model assistant. Your task is to generate five 
     different versions of the given user question to retrieve relevant documents from a vector 
@@ -135,7 +107,7 @@ def multi_query_pipeline(vectorstore, question):
 
     prompt = ChatPromptTemplate.from_template(template)
 
-    llm = ChatOpenAI(model="gpt-4",temperature=0.8)
+    llm = ChatOpenAI(model="gpt-4o",temperature=0.8)
 
     final_rag_chain = (
         {"context": retrieval_chain, 
@@ -149,16 +121,6 @@ def multi_query_pipeline(vectorstore, question):
     return answer
 
 def rag_fusion(vectorstore, question):
-    """
-    This function performs a fusion of retrieval augmented generation (RAG) queries and documents to answer a user question.
-    
-    Args:
-        vectorstore (VectorStore): The vector store used for retrieval.
-        question (str): The user question to be answered.
-        
-    Returns:
-        str: The answer to the user question based on the retrieved documents.
-    """
     llm = ChatOpenAI(model="gpt-4",temperature=0.8)
     retriever = vectorstore.as_retriever()
     # RAG-Fusion: Related

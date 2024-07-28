@@ -1952,6 +1952,21 @@ PyYAML = ">=5.3"
 tenacity = ">=8.1.0,<8.4.0 || >8.4.0,<9.0.0"
 
 [[package]]
+name = "langchain-experimental"
+version = "0.0.63"
+description = "Building applications with LLMs through composability"
+optional = false
+python-versions = "<4.0,>=3.8.1"
+files = [
+    {file = "langchain_experimental-0.0.63-py3-none-any.whl", hash = "sha256:cb4ae7a685bb3c077d138b4533ed02e8df1f5f784333c3e52dcae8c80f031ca2"},
+    {file = "langchain_experimental-0.0.63.tar.gz", hash = "sha256:fc894599bfac43445004a9ff60d9a28751426b2fea1979e4b2fa453c847850c4"},
+]
+
+[package.dependencies]
+langchain-community = ">=0.2.6,<0.3.0"
+langchain-core = ">=0.2.10,<0.3.0"
+
+[[package]]
 name = "langchain-openai"
 version = "0.1.19"
 description = "An integration package connecting OpenAI and LangChain"
@@ -5007,4 +5022,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "50c9d942273d04e2e2f287f0701d3d45d1724449712e6e4e438bd1cd6695d9c1"
+content-hash = "4da90ee82d413d51a80fb98b6b6503835e5d348df25a44639079d77ad57f7743"

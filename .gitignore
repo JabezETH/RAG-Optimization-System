@@ -3,3 +3,4 @@
 .venv
 .env
 /test_data
+/vector_store
