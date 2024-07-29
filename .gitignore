@@ -4,3 +4,5 @@
 .env
 /test_data
 /vector_store
+/large_vector_db
+/semantic_vector_db
