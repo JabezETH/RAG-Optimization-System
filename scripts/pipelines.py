@@ -37,7 +37,7 @@ def simple_pipeline(vectorstore, question):
     prompt_template = PromptTemplate(
         input_variables=["context", "question"],
         template="""
-        Answer the question based on the given context."
+        Answer the question based on only the given context. If there are no good answers, say "No good answers found".
 
         Context:
         {context}
@@ -98,7 +98,7 @@ def multi_query_pipeline(vectorstore, question):
     docs = retrieval_chain.invoke({"question":question})
 
     # RAG
-    template = """Answer the following question based on this context:
+    template = """Answer the question based on only the given context. If there are no good answers, say "No good answers found".
 
     {context}
 
@@ -164,7 +164,7 @@ def rag_fusion(vectorstore, question):
     retrieval_chain_rag_fusion = generate_queries | retriever.map() | reciprocal_rank_fusion
 
     # RAG
-    template = """Answer the following question based on this context:
+    template = """Answer the question using only the information provided in the context. If the context does not offer a suitable answer, reply with 'No good answers found:
 
     {context}
 

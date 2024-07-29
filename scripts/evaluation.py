@@ -37,7 +37,7 @@ def generate_syntetic_testdata(documents, file_path):
     """
     # generator with openai models
     generator_llm = ChatOpenAI(model="gpt-3.5-turbo-16k")
-    critic_llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
+    critic_llm = ChatOpenAI(model="gpt-4")
     embeddings = OpenAIEmbeddings()
 
     generator = TestsetGenerator.from_langchain(
@@ -48,12 +48,12 @@ def generate_syntetic_testdata(documents, file_path):
     )
 
     # generate testset
-    testset = generator.generate_with_langchain_docs(documents, test_size=10, distributions={simple: 0.5, reasoning: 0.25, multi_context: 0.25})
+    testset = generator.generate_with_langchain_docs(documents, test_size=20, distributions={simple: 0.5, reasoning: 0.25, multi_context: 0.25})
     test_data = testset.to_pandas()
     test_data.to_csv(file_path, index=False)
     return test_data
 
-def adding_answer_to_testdata(test_data, rag_pipeline, vector, retriever,file_path):
+def adding_answer_to_testdata(test_data, rag_pipeline, vector, retriever):
     """
     Adds answers to the test data using a RAG pipeline and saves the result to a CSV file.
     Args:
@@ -80,7 +80,6 @@ def adding_answer_to_testdata(test_data, rag_pipeline, vector, retriever,file_pa
     
     df = pd.DataFrame(data)
     dataset = Dataset.from_pandas(df)
-    dataset.to_csv(file_path, index=False)
     return dataset
 
 def ragas_evaluator(dataset):
