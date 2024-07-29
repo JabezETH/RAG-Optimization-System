@@ -18,6 +18,7 @@ langchainhub = "^0.1.20"
 ragas = "^0.1.11"
 seaborn = "^0.13.2"
 langchain-experimental = "^0.0.63"
+streamlit = "^1.37.0"
 
 
 [tool.poetry.group.dev.dependencies]
