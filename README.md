@@ -46,24 +46,6 @@ Based on the metrics we have evaluated, we can determine which strategies to mod
 
 ### Installation
 ```sh
-# Create a virtual environment
-python -m venv env
-
-# Activate the virtual environment
-# For Windows
-env\Scripts\activate
-# For MacOS/Linux
-source env/bin/activate
-
-# Install backend dependencies
-pip install -r requirements.txt
-
-# Install frontend dependencies
-pip install -r frontend_requirements.txt
-```
----
-### Usage 
-```sh
 git clone https://github.com/JabezETH/RAG-Optimization-System.git
 cd RAG-Optimization-System
 poetry init
