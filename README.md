@@ -125,7 +125,10 @@ streamlit run app.py
 ```
 ### Result
 
-- For this project text-embedding-3-large embedding model with recursive character chunking with chunk size 500 performed well.
+The first strategy I explored was different chunking mechanisms. I tried recursive character chunking with large and small chunk sizes, as well as semantic chunking. From these experiments, the smaller chunk size of 500 characters performed better. The second strategy involved experimenting with different embedding models, specifically text-embedding-ada-002 and text-embedding-3-large. The hypothesis was that using a good embedding model can better represent the semantic meaning of the documents in the vector database. The text-embedding-3-large model showed better performance.
+Another strategy I tried was multi-query. The hypothesis was that the user's query could be ambiguous, and since the user's query is used to retrieve the necessary documents from the vector database, it can influence the performance of the pipeline. Therefore, I used a multi-query strategy that rewrites the user's question from different perspectives to retrieve all the relevant documents. However, when I evaluated the results, the multi-query strategy did not perform as well as the simple RAG pipeline, particularly in terms of the context recall metric from the RAGAS evaluation, which measures the ground truth in the context.
+To improve the multi-query strategy, I used RAG fusion, which is similar to multi-query but instead of using the unique union of the retrieved documents, it employs a technique called Reciprocal Rank Fusion (RRF) to combine multiple ranked lists of search results into a single, more effective ranked list. This approach aimed to improve the context recall by selecting the appropriate chunks. However, this did not improve the mean result. The cause may be for the simpler question the simple RAG pipeline performs well and most of the test data include this type question. In the future I will increase the test data more than 20 question to include variety of questions to test the pipelines. For this project embedding model text-embedding-3-large with recursive character chunking with chunk size 500 performed well.
+
 
 ### Future Plan
 - Generate larger test data set with more questions to capture variety and evaluate.
