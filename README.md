@@ -126,11 +126,12 @@ streamlit run app.py
 ```
 ### Result
 
-From all the strategies used the simple pipeline with text-embedding-3-large with small chunk size performed well.
+- From all the strategies used the simple pipeline with text-embedding-3-large with small chunk size performed well.
 
 ### Future Plan
-Use test data with more questions to capture variety of questions
-Try using opensource models to reduce cost
+- Use test data with more questions to capture variety of questions and evaluate.
+- Add more unit tests
+- Using open source models like llama 3.1 to reduce cost
 
 ### Challange
 
