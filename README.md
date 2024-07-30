@@ -125,7 +125,7 @@ streamlit run app.py
 ```
 ### Result
 
-- From all the strategies used the simple pipeline with text-embedding-3-large with small chunk size performed well.
+- For this project embedding model text-embedding-3-large with recursive character chunking with chunk size 500 performed well.
 
 ### Future Plan
 - Use test data with more questions to capture variety of questions and evaluate.
