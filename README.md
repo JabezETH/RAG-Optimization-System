@@ -79,6 +79,10 @@ To address this, the Multi Query strategy involves rewriting the user's query 5 
 The motivation behind this approach is to better capture the user's underlying informational need, even if it is not fully reflected in the initial query formulation. By diversifying the queries and aggregating the retrieved contexts, the system aims to improve the overall performance and relevance of the responses.
 
 - **RAG Fusion**
+
+![Description](/pictures/demonstration/Slide6.JPG)
+
+
 In the Multi-Query approach, the goal was to improve the context recall. Now, we can implement RAG Fusion, which is similar to Multi-Query, but with an additional step of reranking the retrieved documents. This reranking step can help improve the context precision.
 ---
 
@@ -89,6 +93,28 @@ cd RAG-Optimization-System
 poetry init
 ```
 ### Usage
+
+Downlaod and save the data using this code:
+```sh
+from datasets import load_dataset
+import pandas as pd
+import os
+
+# Load the dataset from Hugging Face
+dataset = load_dataset('cnn_dailymail', '3.0.0', split='validation')
+
+# Convert the dataset to a Pandas DataFrame
+df = dataset.to_pandas()
+
+# Ensure the directory exists
+os.makedirs('data', exist_ok=True)
+
+# Save the DataFrame to a CSV file
+df.to_csv('data/cnn_dailymail_3.0.0.csv', index=False)
+
+# Confirm the file is saved
+print("CSV file saved successfully!")
+```
 
 Run the frontend for demonstration:
 ```sh
