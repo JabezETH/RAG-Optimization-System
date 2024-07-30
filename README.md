@@ -102,7 +102,7 @@ cd scripts
 python3 run load_data
 ```
 - create .env file and save the required API KEYS.
-Two API keys are required one for the LLM model and 
+Two API keys are required one for the LLM model and the other for Langsmith
 
 ```sh
 OPENAI_API_KEY = ''
@@ -125,3 +125,16 @@ cd frontend
 streamlit run app.py
 ```
 ### Result
+
+From all the strategies used the simple pipeline with text-embedding-3-large with small chunk size performed well.
+
+### Future Plan
+Use test data with more questions to capture variety of questions
+Try using opensource models to reduce cost
+
+## Challange
+
+- Diffrent results when pipelines are evaluated. Tried to solve the problem by making parameters constant like:
+    - Generated test data
+    - Vector database when evaluating diffrent strategies in the retriver
+    - Setting tempreture 0.1 for the LLM to make the answer more deterministic
