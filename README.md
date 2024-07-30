@@ -10,6 +10,8 @@ To create the best possible RAG system with the most effective strategies to pro
 ### Evaluation
 To evaluate the RAG pipeline RAGAS syntetic test data is used. 
 
+![Description](/pictures/demonstration/Slide5.JPG)
+
 By evaluating the RAG pipeline's performance on these datasets, we can assess the effectiveness of the current RAG strategies. Based on the evaluation results, we will update and refine the RAG strategies to improve the bot's question-answering capabilities.
 
 The overall workflow is to use the RAGAS evaluation to assess the RAG pipeline, iterating on the RAG strategies based on the evaluation findings to continuously enhance the overall system.
@@ -27,6 +29,7 @@ By modifying these variables, we can improve the RAG performance.
 ---
 
 ### RAGAS Evaluation Metrics
+
 - **Faithfulness:** Measures the factual consistency of the generated answer against the given context. The answer is scaled to a (0,1) range; higher is better.
 - **Answer Relevancy:** Assesses how pertinent the generated answer is to the given prompt. Lower scores are assigned to incomplete or redundant answers, and higher scores indicate better relevancy.
 - **Context Recall:** Measures the extent to which the retrieved context aligns with the annotated answer, treated as the ground truth. Values range between 0 and 1, with higher values indicating better performance.
@@ -48,9 +51,9 @@ OpenAI default embedding model: text-embedding-ada-002
 Vector store as the retriever
 Generator Model: gpt4o
 - **Chunking Mechanisms**
+
 ![Description](/pictures/demonstration/Slide2.JPG)
 ![Description](/pictures/demonstration/Slide3.JPG)
-![Description](/pictures/demonstration/Slide4.JPG)
 In this, different chunking mechanisms are being experimented with by keeping the other parameters constant in the simple RAG pipeline, in order to find the best chunking mechanism.
 
 The idea behind this is that we need to chunk the documents, as we have a limited context window and larger documents will have high noise, which can distract the language model (LLM) from finding the relevant context. However, the chunking size also matters. We should be able to chunk documents with similar meaning together, so that the retriever will have enough chunks to provide to the LLM to answer the user's query.
@@ -67,7 +70,8 @@ Semantic chunking mechanism
 In this notebook we are expermenting on two embedding models. One is the default text-embedding-ada-002 and the other is text-embedding-3-large. By improving the embedding model we can improve the relevancy of the retrived documents.
 
 - **Multiquery RAG**
-![Description](/pictures/demonstration/Slide5.JPG)
+![Description](/pictures/demonstration/Slide4.JPG)
+
 The simple pipeline approach can be improved by using a Multi Query strategy. The goal of this strategy is to enhance the performance of the Retrieval Augmented Generation (RAG) model, particularly the context recall metrics. The key idea is to retrieve the documents that are most relevant for answering the user's query. The hypothesis is that the user's intended question may differ from the way they have written the query.
 
 To address this, the Multi Query strategy involves rewriting the user's query 5 times from different perspectives. This is done to uncover the relevant documents that can provide the necessary context. A chunk of text is then retrieved for each of these rewritten queries. Finally, the unique union of all these retrieved documents is used as the context for answering the original user query.
