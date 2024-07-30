@@ -82,7 +82,6 @@ The motivation behind this approach is to better capture the user's underlying i
 
 ![Description](/pictures/demonstration/Slide6.JPG)
 
-
 In the Multi-Query approach, the goal was to improve the context recall. Now, we can implement RAG Fusion, which is similar to Multi-Query, but with an additional step of reranking the retrieved documents. This reranking step can help improve the context precision.
 ---
 
