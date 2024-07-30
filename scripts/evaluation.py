@@ -140,7 +140,7 @@ def evaluation_mean(evaluation_result):
         evaluation_result (dict): A dictionary containing the evaluation metrics.
 
     Returns:
-        None
+        str: A formatted string with the mean values of the evaluation metrics.
 
     Prints:
         The mean values of the evaluation metrics:
@@ -154,6 +154,18 @@ def evaluation_mean(evaluation_result):
         faithfulness = round(evaluation_result['faithfulness'].mean() * 100, 2)
         answer_relevancy = round(evaluation_result['answer_relevancy'].mean() * 100, 2)
         context_recall = round(evaluation_result['context_recall'].mean() * 100, 2)
-        print(f'context_precision: {context_precision}%, faithfulness: {faithfulness}%, answer_relevancy: {answer_relevancy}%, context_recall: {context_recall}%')
+        
+        result = (
+            f'context_precision: {context_precision}%, '
+            f'faithfulness: {faithfulness}%, '
+            f'answer_relevancy: {answer_relevancy}%, '
+            f'context_recall: {context_recall}%'
+        )
+        print(result)
+        return result
+    except KeyError as e:
+        print(f"Missing key in evaluation result: {e}")
+    except AttributeError as e:
+        print(f"Ensure that the evaluation_result values support the 'mean' method: {e}")
     except Exception as e:
         print(f"An error occurred while calculating the mean evaluation metrics: {e}")

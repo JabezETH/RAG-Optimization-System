@@ -1,9 +1,10 @@
 {
-"data_file_path": "/data/cnn_dailymail_3.0.0.csv",
-"synthetic_test_data_path": "/test_data/syntetic_test_data.csv",
-"persist_directory_for_smaller_chunck_vector_db": "/vector_store",
-"persist directory for larger_chunk_vector_db": "/text_embedding_large",
-"persist_directory_for_semantic_vector_db": "/semantic_vector_db"
+"data_file_path": "/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/data/cnn_dailymail_3.0.0.csv",
+"synthetic_test_data_path": "/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/test_data/syntetic_test_data.csv",
+"persist_directory_for_default_vector_db": "/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/vector_store",
+"persist_directory_for_smaller_chunck_vector_db": "/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/text_embedding_large",
+"persist_directory_for_larger_chunk_vector_db": "/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/large_vector_db",
+"persist_directory_for_semantic_vector_db": "/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/semantic_vector_db"
 
   }
   

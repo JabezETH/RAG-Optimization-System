@@ -21,6 +21,7 @@ The overall workflow is to use the RAGAS evaluation to assess the RAG pipeline, 
 ### Variables Affecting RAG Performance
 1. **User query**
 2. **Chunking mechanism**
+3. **Embbeding models**
 3. **Chunk Ranking**
 4. **Retriver Performance**
 
@@ -100,13 +101,14 @@ poetry shell
 cd scripts
 python3 run load_data
 ```
-- create .env file and save the required API KEYS
+- create .env file and save the required API KEYS.
+Two API keys are required one for the LLM model and 
 
 ```sh
 OPENAI_API_KEY = ''
 LANGCHAIN_API_KEY = ''
 ```
-- Update /filepath.json as needed for file paths
+- Update /filepath.json for each data and database
 
 - Generate vector stores and save, for easy access and cost reduction.
 by runing this code:

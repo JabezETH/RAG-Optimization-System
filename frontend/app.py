@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import sys
+import json
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 
@@ -11,9 +12,28 @@ import file_loader
 import pipelines
 import evaluation
 
-# Loading data
-file_path = '/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/data/cnn_dailymail_3.0.0.csv'
-data = file_loader.load_csv(file_path)
+# Load JSON from file
+json_path = '../filepath.json'
+
+with open(json_path, 'r') as json_file:
+    file_paths = json.load(json_file)
+data_file_path = file_paths['data_file_path']
+synthetic_test_data_path = file_paths['synthetic_test_data_path']
+
+# loading data
+data = file_loader.load_csv(data_file_path)
+
+# loading synthetic test data
+synthetic_test_data = pd.read_csv(synthetic_test_data_path)
+
+# loading persist directory for smaller chunck vector db
+persist_directory_for_smaller_chunck_vector_db = file_paths['persist_directory_for_smaller_chunck_vector_db']
+
+# loading persist directory for larger chunck vector db
+persist_directory_for_larger_chunk_vector_db = file_paths['persist_directory_for_larger_chunk_vector_db']
+
+# loading persist directory for semantic vector db
+persist_directory_for_semantic_vector_db = file_paths['persist_directory_for_semantic_vector_db']
 
 # Display title and initial greeting
 st.write("""
@@ -22,19 +42,16 @@ st.write("""
 
 # Display a sample of the loaded data
 st.write("### Loaded Data Sample")
-df = pd.read_csv(file_path)
+df = pd.read_csv(data_file_path)
 st.dataframe(df.head())
 
-# Load synthetic test data
-synthetic_test_data_path = '/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/test_data/syntetic_test_data.csv'
-synthetic_test_data = pd.read_csv(synthetic_test_data_path)
 st.write("### Synthetic Test Data Sample")
 st.dataframe(synthetic_test_data.head(19))
 
 # Initialize Embeddings and Database
 st.write("- Initializing Embeddings and Database")
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
-db = Chroma(persist_directory="/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/text_embedding_large", embedding_function=embeddings)
+db = Chroma(persist_directory=persist_directory_for_smaller_chunck_vector_db, embedding_function=embeddings)
 retriever = db.as_retriever(search_type="similarity", search_kwargs={"k": 6})
 
 # Initialize session state to store results
@@ -77,7 +94,8 @@ if simple_rag_500_expander.button("Execute Simple Rag Pipeline (500 chunk size)"
 # Simple Rag Pipeline Evaluation with 1000 chunk size
 simple_rag_1000_expander = st.expander("Simple Rag Pipeline Evaluation with 1000 chunk size")
 if simple_rag_1000_expander.button("Execute Simple Rag Pipeline (1000 chunk size)"):
-    large_db = Chroma(persist_directory="/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/large_vector_db", embedding_function=embeddings)
+    embeddings_large = OpenAIEmbeddings()
+    large_db = Chroma(persist_directory=persist_directory_for_larger_chunk_vector_db, embedding_function=embeddings_large)
     large_retriever = large_db.as_retriever(search_type="similarity", search_kwargs={"k": 6})
     execute_evaluation(pipelines.simple_pipeline, large_db, large_retriever, synthetic_test_data, "Simple Rag Pipeline (1000 chunk size)")
 
