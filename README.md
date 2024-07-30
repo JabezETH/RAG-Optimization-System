@@ -39,11 +39,42 @@ Based on the metrics we have evaluated, we can determine which strategies to mod
 ### Strategies
 
 - **Simple RAG system**
-- **Chunking Mechanisms**
-- **Embedding Modles**
-- **Multiquery RAG**
-- **RAG Fusion**
+![Description](/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/pictures/demonstration/Slide1.JPG)
+In this notebook we will create a simple rag pipeline with basic strategies to determine the baseline result. These are the strategies we are following in this simple rag pipeline
 
+Recursive Character Splitter with 1000 chunk size and chunk overlap of 250
+OpenAI default embedding model: text-embedding-ada-002
+Vector store as the retriever
+Generator Model: gpt4o
+- **Chunking Mechanisms**
+![Description](/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/pictures/demonstration/Slide2.JPG)
+![Description](/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/pictures/demonstration/Slide3.JPG)
+![Description](/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/pictures/demonstration/Slide4.JPG)
+In this, different chunking mechanisms are being experimented with by keeping the other parameters constant in the simple RAG pipeline, in order to find the best chunking mechanism.
+
+The idea behind this is that we need to chunk the documents, as we have a limited context window and larger documents will have high noise, which can distract the language model (LLM) from finding the relevant context. However, the chunking size also matters. We should be able to chunk documents with similar meaning together, so that the retriever will have enough chunks to provide to the LLM to answer the user's query.
+
+In the simple RAG pipeline, we have used recursive character chunking with a chunking size of 1000. In this notebook, we will experiment with smaller and larger chunking sizes for the recursive character chunking, as well as the semantic chunking mechanism, to improve the RAG performance.
+
+The chunking mechanisms being tested are:
+
+Small Chunking size for recursive character chunking
+larger chunking size for recursive character chunking
+Semantic chunking mechanism
+
+- **Embedding Modles**
+In this notebook we are expermenting on two embedding models. One is the default text-embedding-ada-002 and the other is text-embedding-3-large. By improving the embedding model we can improve the relevancy of the retrived documents.
+
+- **Multiquery RAG**
+![Description](/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/pictures/demonstration/Slide5.JPG)
+The simple pipeline approach can be improved by using a Multi Query strategy. The goal of this strategy is to enhance the performance of the Retrieval Augmented Generation (RAG) model, particularly the context recall metrics. The key idea is to retrieve the documents that are most relevant for answering the user's query. The hypothesis is that the user's intended question may differ from the way they have written the query.
+
+To address this, the Multi Query strategy involves rewriting the user's query 5 times from different perspectives. This is done to uncover the relevant documents that can provide the necessary context. A chunk of text is then retrieved for each of these rewritten queries. Finally, the unique union of all these retrieved documents is used as the context for answering the original user query.
+
+The motivation behind this approach is to better capture the user's underlying informational need, even if it is not fully reflected in the initial query formulation. By diversifying the queries and aggregating the retrieved contexts, the system aims to improve the overall performance and relevance of the responses.
+
+- **RAG Fusion**
+In the Multi-Query approach, the goal was to improve the context recall. Now, we can implement RAG Fusion, which is similar to Multi-Query, but with an additional step of reranking the retrieved documents. This reranking step can help improve the context precision.
 ---
 
 ### Installation
