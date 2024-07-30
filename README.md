@@ -125,7 +125,7 @@ streamlit run app.py
 ```
 ### Result
 
-- For this project embedding model text-embedding-3-large with recursive character chunking with chunk size 500 performed well.
+- For this project text-embedding-3-large embedding model with recursive character chunking with chunk size 500 performed well.
 
 ### Future Plan
 - Use test data with more questions to capture variety of questions and evaluate.
