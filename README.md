@@ -128,9 +128,10 @@ streamlit run app.py
 - For this project text-embedding-3-large embedding model with recursive character chunking with chunk size 500 performed well.
 
 ### Future Plan
-- Use test data with more questions to capture variety of questions and evaluate.
-- Add more unit tests
-- Using open source models like llama 3.1 to reduce cost
+- Generate larger test data set with more questions to capture variety and evaluate.
+- Exploring other strategies like Query stracturing (stracturing for vector store metadata filters) and multi vector retriver
+- Add more unit tests.
+- Using open source models like llama 3.1 to reduce cost.
 
 ### Challange
 
