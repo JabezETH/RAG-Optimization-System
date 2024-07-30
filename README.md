@@ -70,6 +70,7 @@ Semantic chunking mechanism
 In this notebook we are expermenting on two embedding models. One is the default text-embedding-ada-002 and the other is text-embedding-3-large. By improving the embedding model we can improve the relevancy of the retrived documents.
 
 - **Multiquery RAG**
+
 ![Description](/pictures/demonstration/Slide4.JPG)
 
 The simple pipeline approach can be improved by using a Multi Query strategy. The goal of this strategy is to enhance the performance of the Retrieval Augmented Generation (RAG) model, particularly the context recall metrics. The key idea is to retrieve the documents that are most relevant for answering the user's query. The hypothesis is that the user's intended question may differ from the way they have written the query.
@@ -90,34 +91,35 @@ In the Multi-Query approach, the goal was to improve the context recall. Now, we
 git clone https://github.com/JabezETH/RAG-Optimization-System.git
 cd RAG-Optimization-System
 poetry init
+poetry shell
 ```
 ### Usage
 
-Downlaod and save the data using this code:
+- Downlaod and save the data as csv:
 ```sh
-from datasets import load_dataset
-import pandas as pd
-import os
-
-# Load the dataset from Hugging Face
-dataset = load_dataset('cnn_dailymail', '3.0.0', split='validation')
-
-# Convert the dataset to a Pandas DataFrame
-df = dataset.to_pandas()
-
-# Ensure the directory exists
-os.makedirs('data', exist_ok=True)
-
-# Save the DataFrame to a CSV file
-df.to_csv('data/cnn_dailymail_3.0.0.csv', index=False)
-
-# Confirm the file is saved
-print("CSV file saved successfully!")
+cd scripts
+python3 run load_data
 ```
+- create .env file and save the required API KEYS
 
+```sh
+OPENAI_API_KEY = ''
+LANGCHAIN_API_KEY = ''
+```
+- Update /filepath.json as needed for file paths
+
+- Generate vector stores and save, for easy access and cost reduction.
+by runing this code:
+```sh
+# This will create smaller and large recursive character embbeded vector db, 
+# and semantic chunked and embeded vector db, 
+cd scripts
+python3 generate_vector_store
+```
 Run the frontend for demonstration:
 ```sh
 cd RAG-Optimization-System
 cd frontend
 streamlit run app.py
 ```
+### Result

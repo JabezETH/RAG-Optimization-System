@@ -1,0 +1,9 @@
+{
+"data_file_path": "/data/cnn_dailymail_3.0.0.csv",
+"synthetic_test_data_path": "/test_data/syntetic_test_data.csv",
+"persist_directory_for_smaller_chunck_vector_db": "/vector_store",
+"persist directory for larger_chunk_vector_db": "/text_embedding_large",
+"persist_directory_for_semantic_vector_db": "/semantic_vector_db"
+
+  }
+  

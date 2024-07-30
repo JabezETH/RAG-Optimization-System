@@ -33,8 +33,8 @@ st.dataframe(synthetic_test_data.head(19))
 
 # Initialize Embeddings and Database
 st.write("- Initializing Embeddings and Database")
-embeddings = OpenAIEmbeddings()
-db = Chroma(persist_directory="/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/vector_store", embedding_function=embeddings)
+embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
+db = Chroma(persist_directory="/home/jabez/rizzbuzz with poetry/RAG-Optimization-System/text_embedding_large", embedding_function=embeddings)
 retriever = db.as_retriever(search_type="similarity", search_kwargs={"k": 6})
 
 # Initialize session state to store results

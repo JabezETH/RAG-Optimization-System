@@ -52,7 +52,7 @@ def simple_pipeline(vectorstore, question):
             """
         )
         
-        llm = ChatOpenAI(model="gpt-4", temperature=0.5)
+        llm = ChatOpenAI(model="gpt-4", temperature=0.1)
 
         def format_docs(docs):
             return "\n\n".join(doc.page_content for doc in docs)
@@ -116,7 +116,7 @@ def multi_query_pipeline(vectorstore, question):
 
         prompt = ChatPromptTemplate.from_template(template)
 
-        llm = ChatOpenAI(model="gpt-4", temperature=0.8)
+        llm = ChatOpenAI(model="gpt-4", temperature=0.1)
 
         final_rag_chain = (
             {"context": retrieval_chain, 
@@ -143,7 +143,7 @@ def rag_fusion(vectorstore, question):
         str: The generated answer.
     """
     try:
-        llm = ChatOpenAI(model="gpt-4", temperature=0.8)
+        llm = ChatOpenAI(model="gpt-4", temperature=0.1)
         retriever = vectorstore.as_retriever()
         
         template = """You are a helpful assistant that generates multiple search queries based on a single input query. \n
