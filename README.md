@@ -113,8 +113,7 @@ LANGCHAIN_API_KEY = ''
 - Generate vector stores and save, for easy access and cost reduction.
 by runing this code:
 ```sh
-# This will create smaller and large recursive character embbeded vector db, 
-# and semantic chunked and embeded vector db, 
+# This will create smaller and large recursive character embbeded vector dbs, semantic chunked vector db and embeded vector db with text-embedding-3-large embeding.
 cd scripts
 python3 generate_vector_store
 ```
