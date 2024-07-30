@@ -132,7 +132,7 @@ From all the strategies used the simple pipeline with text-embedding-3-large wit
 Use test data with more questions to capture variety of questions
 Try using opensource models to reduce cost
 
-## Challange
+### Challange
 
 - Diffrent results when pipelines are evaluated. Tried to solve the problem by making parameters constant like:
     - Generated test data
