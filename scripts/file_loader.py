@@ -57,6 +57,37 @@ def character_text_splitter(docs: List[str], chunk_size: int, chunk_overlap: int
     except Exception as e:
         print(f"An error occurred while splitting the documents: {e}")
 
+def character_text_splitter_large_embedding(docs: List[str], chunk_size: int, chunk_overlap: int, persist_directory: str) -> Chroma:
+    """
+    Split the given documents into chunks of text using the RecursiveCharacterTextSplitter and
+    create a persistent Chroma vector store, replacing any existing data.
+
+    Args:
+        docs (List[str]): A list of documents to be split.
+        chunk_size (int): The size of each text chunk.
+        chunk_overlap (int): The overlap between consecutive text chunks.
+        persist_directory (str): The directory to store the persistent vector store files.
+
+    Returns:
+        Chroma: A Chroma object containing the split documents and their embeddings.
+    """
+    try:
+        # Remove the existing persistence directory if it exists
+        if os.path.exists(persist_directory):
+            shutil.rmtree(persist_directory)
+
+        # Initialize the text splitter with the specified chunk size and overlap
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+
+        # Split the documents into smaller chunks
+        splits = text_splitter.split_documents(docs)
+
+        # Create a Chroma vector store with persistence enabled
+        vectorstore = Chroma.from_documents(splits, embedding=OpenAIEmbeddings(model="text-embedding-3-large"), persist_directory=persist_directory)
+        return vectorstore
+    except Exception as e:
+        print(f"An error occurred while splitting the documents: {e}")
+
 def semantic_text_splitter(docs: List[str], persist_directory: str) -> Chroma:
     """
     Split the given documents into chunks of text using the SemanticChunker and OpenAIEmbeddings.
