@@ -39,6 +39,8 @@ Based on the metrics we have evaluated, we can determine which strategies to mod
 ### Strategies
 
 - **Simple RAG system**
+- **Chunking Mechanisms**
+- **Embedding Modles**
 - **Multiquery RAG**
 - **RAG Fusion**
 
@@ -49,4 +51,12 @@ Based on the metrics we have evaluated, we can determine which strategies to mod
 git clone https://github.com/JabezETH/RAG-Optimization-System.git
 cd RAG-Optimization-System
 poetry init
+```
+### Usage
+
+Run the frontend for demonstration:
+```sh
+cd RAG-Optimization-System
+cd frontend
+streamlit run app.py
 ```
